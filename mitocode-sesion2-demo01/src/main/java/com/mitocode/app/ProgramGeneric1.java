@@ -3,29 +3,26 @@ package com.mitocode.app;
 import java.util.Scanner;
 
 import com.mitocode.service.PrintService;
-import com.mitocode.service.PrintServiceString;
 
 public class ProgramGeneric1 {
 
 	public static void main(String[] args) {
 		Scanner sc=new Scanner(System.in);
 		
-		PrintService ps=new PrintService();
+		PrintService<String> ps=new PrintService<String>();
 		
 		
 		System.out.print("How many value? ");
 		int n=sc.nextInt();
 		
-		ps.addValue(String.valueOf(1));
+		ps.addValue("1");
 		
 		for (int i = 0; i < n; i++) {
-			String value=sc.next();
-			ps.addValue(value);
+			ps.addValue(sc.next());
 		}
 		
 		ps.print();
-		String firstValue=(String)ps.first();
-		System.out.println("Firt: "+firstValue);
+		System.out.println("Firt: "+ps.first());
 
 		sc.close();
 	}
