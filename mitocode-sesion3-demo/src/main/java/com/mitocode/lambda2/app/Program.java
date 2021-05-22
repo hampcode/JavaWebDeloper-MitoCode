@@ -3,8 +3,7 @@ package com.mitocode.lambda2.app;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mitocode.lambda1.entities.Product;
-import com.mitocode.lambda2.util.ProductPredicate;
+import com.mitocode.lambda2.entities.Product;
 
 
 
@@ -19,7 +18,7 @@ public class Program {
 		list.add(new Product("Tablet", 350.50));
 		list.add(new Product("HD Case", 80.90));
 
-		list.removeIf(new ProductPredicate());
+		list.removeIf(Product::staticProductPredicate);
 
 		for (Product p : list) {
 			System.out.println(p);
