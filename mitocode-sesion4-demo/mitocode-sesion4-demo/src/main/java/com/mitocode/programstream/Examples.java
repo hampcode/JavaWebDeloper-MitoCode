@@ -2,7 +2,6 @@ package com.mitocode.programstream;
 
 import static com.mitocode.utils.DataUtils.getTasks;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +26,9 @@ public class Examples {
 		
 		long count=countAllReadingTasks(tasks);
 		System.out.println(count);
+		
+		List<String> tasksDistinctTags=allDistinctTags(tasks);
+		tasksDistinctTags.forEach(System.out::println);
 	}
 
 	// TODO Ejemplo 1: Encuentra todas los títulos de tareas de lectura ordenadas por la fecha de creación
@@ -61,5 +63,15 @@ public class Examples {
 	            filter(task -> task.getType() == TaskType.READING).
 	            count();
 	}
+	
+	//TODO: Ejemplo 5: Encuentra todas las etiquetas únicas de todas las tareas
+	private static List<String> allDistinctTags(List<Task> tasks) {
+        return tasks.stream()
+        		.flatMap(task -> task.getTags()
+        			.stream())
+        			.distinct()
+        			.collect(toList());
+	}
+
 
 }
