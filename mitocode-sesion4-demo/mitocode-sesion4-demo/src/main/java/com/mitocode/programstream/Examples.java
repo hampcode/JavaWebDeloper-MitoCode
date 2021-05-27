@@ -24,6 +24,9 @@ public class Examples {
 		
 		List<String> topNTasks=topN(tasks,3,1);
 		topNTasks.forEach(System.out::println);
+		
+		long count=countAllReadingTasks(tasks);
+		System.out.println(count);
 	}
 
 	// TODO Ejemplo 1: Encuentra todas los títulos de tareas de lectura ordenadas por la fecha de creación
@@ -50,6 +53,13 @@ public class Examples {
                 skip(page * n). //obtenemos los productos a partir del page*n (inclusive)
                 limit(n).
                 collect(toList());
+	}
+	
+	//TODO: Ejemplo 4: Cuenta todas las tareas de lectura
+	public static long countAllReadingTasks(List<Task> tasks) {
+	    return tasks.stream().
+	            filter(task -> task.getType() == TaskType.READING).
+	            count();
 	}
 
 }
