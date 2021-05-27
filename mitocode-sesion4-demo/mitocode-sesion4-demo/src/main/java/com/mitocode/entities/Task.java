@@ -19,6 +19,7 @@ public class Task {
     private TaskType type;
     private LocalDate createdOn;
     private Set<String> tags = new HashSet<>();
+    //private Set<TaskTag> tags2 = new HashSet<>();
     
     public Task(String id, String title, TaskType type) {
         this.id = id;
