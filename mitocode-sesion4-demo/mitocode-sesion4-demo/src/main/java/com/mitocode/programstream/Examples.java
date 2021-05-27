@@ -19,11 +19,11 @@ public class Examples {
 
 	// TODO Ejemplo 1: Encuentra todas los títulos de tareas de lectura ordenadas por la fecha de creación
 	private static List<String> allReadingTasks(List<Task> tasks) {
-		return tasks.stream().
-	            filter(task -> task.getType() == TaskType.READING).
-	            sorted(Comparator.comparing(Task::getCreatedOn)).
-	            map(Task::getTitle).
-	            collect(Collectors.toList());
+		 return tasks.stream().
+		            filter(task -> task.getType() == TaskType.READING).
+		            sorted(Comparator.comparing(Task::getCreatedOn).reversed()).
+		            map(Task::getTitle).
+		            collect(Collectors.toList());
 	}
 
 }
