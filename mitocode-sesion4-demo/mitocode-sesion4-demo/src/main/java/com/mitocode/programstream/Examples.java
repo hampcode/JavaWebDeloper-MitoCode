@@ -32,6 +32,7 @@ public class Examples {
 		
 		System.out.println(isAllReadingTasksWithTagBooks(tasks));
 		System.out.println(isAnyReadingTasksWithTagJava8(tasks));
+		System.out.println(joinAllTaskTitles(tasks));
 	}
 
 	// TODO Ejemplo 1: Encuentra todas los títulos de tareas de lectura ordenadas por la fecha de creación
@@ -88,5 +89,13 @@ public class Examples {
 	            filter(task -> task.getType() == TaskType.READING).
 	            anyMatch(task -> task.getTags().contains("java8"));
 	}
-
+	
+	//TODO: Ejemplo 7: Crear un resumen de todos los títulos
+	// La función reduce() toma un lambda que une los elementos del flujo.
+	public static String joinAllTaskTitles(List<Task> tasks) {
+	    return tasks.stream().
+	            map(Task::getTitle).
+	            reduce((first, second) -> first + " *** " + second).
+	            get();
+	}
 }
