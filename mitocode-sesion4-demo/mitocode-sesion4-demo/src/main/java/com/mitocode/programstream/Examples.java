@@ -2,6 +2,7 @@ package com.mitocode.programstream;
 
 import static com.mitocode.utils.DataUtils.getTasks;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,12 +19,11 @@ public class Examples {
 
 	// TODO Ejemplo 1: Encuentra todas los títulos de tareas de lectura ordenadas por la fecha de creación
 	private static List<String> allReadingTasks(List<Task> tasks) {
-        List<String> readingTaskTitles = tasks.stream().
-                filter(task -> task.getType() == TaskType.READING).
-                sorted((t1, t2) -> t1.getCreatedOn().compareTo(t2.getCreatedOn())).
-                map(task -> task.getTitle()).
-                collect(Collectors.toList());
-        return readingTaskTitles;
+		return tasks.stream().
+	            filter(task -> task.getType() == TaskType.READING).
+	            sorted(Comparator.comparing(Task::getCreatedOn)).
+	            map(Task::getTitle).
+	            collect(Collectors.toList());
 	}
 
 }
