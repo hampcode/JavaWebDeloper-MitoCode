@@ -22,7 +22,7 @@ public class Examples {
 		List<Task> distinctTasks = allDistinctTasks(tasks);
 		distinctTasks.forEach(System.out::println);
 		
-		List<String> topNTasks=topN(tasks,3);
+		List<String> topNTasks=topN(tasks,3,1);
 		topNTasks.forEach(System.out::println);
 	}
 
@@ -41,13 +41,15 @@ public class Examples {
 	}
 	
 	//TODO Ejemplo 3: Encuentra la 5 primeras tareas de lectura ordenadas por fecha de creación
-	public static List<String> topN(List<Task> tasks, int n){
-	    return tasks.stream().
-	            filter(task -> task.getType() == TaskType.READING).
-	            sorted(comparing(Task::getCreatedOn)).
-	            map(Task::getTitle).
-	            limit(n).
-	            collect(toList());
+	// La página comienza en 0. Así que la segunda página (`page`) será 1 y la página n será n-1.
+	public static List<String> topN(List<Task> tasks, int n, int page){
+	    return  tasks.stream().
+                filter(task -> task.getType() == TaskType.READING).
+                sorted(comparing(Task::getCreatedOn).reversed()).
+                map(Task::getTitle).
+                skip(page * n). //obtenemos los productos a partir del page*n (inclusive)
+                limit(n).
+                collect(toList());
 	}
 
 }
