@@ -29,6 +29,9 @@ public class Examples {
 		
 		List<String> tasksDistinctTags=allDistinctTags(tasks);
 		tasksDistinctTags.forEach(System.out::println);
+		
+		System.out.println(isAllReadingTasksWithTagBooks(tasks));
+		System.out.println(isAnyReadingTasksWithTagJava8(tasks));
 	}
 
 	// TODO Ejemplo 1: Encuentra todas los títulos de tareas de lectura ordenadas por la fecha de creación
@@ -72,6 +75,18 @@ public class Examples {
         			.distinct()
         			.collect(toList());
 	}
+	
+	//TODO: Ejemplo 6: Comprueba si todas las tareas de lectura tienen la etiqueta books
+	public static boolean isAllReadingTasksWithTagBooks(List<Task> tasks) {
+	    return tasks.stream().
+	            filter(task -> task.getType() == TaskType.READING).
+	            allMatch(task -> task.getTags().contains("books"));
+	}
 
+	public static boolean isAnyReadingTasksWithTagJava8(List<Task> tasks) {
+	    return tasks.stream().
+	            filter(task -> task.getType() == TaskType.READING).
+	            anyMatch(task -> task.getTags().contains("java8"));
+	}
 
 }
