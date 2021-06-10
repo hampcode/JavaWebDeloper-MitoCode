@@ -20,8 +20,7 @@ public class Book {
             generator = "book_sequence"
     )
     @Column(
-            name = "id",
-            updatable = false
+            name = "id"
     )
     private Long id;
 

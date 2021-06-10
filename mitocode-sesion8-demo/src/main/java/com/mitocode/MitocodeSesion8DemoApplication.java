@@ -3,13 +3,11 @@ package com.mitocode;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-
 import com.github.javafaker.Faker;
 import com.mitocode.entities.Book;
 import com.mitocode.entities.Course;
+import com.mitocode.entities.Enrolment;
+import com.mitocode.entities.EnrolmentId;
 import com.mitocode.entities.Student;
 import com.mitocode.entities.StudentIdCard;
 import com.mitocode.repository.StudentIdCardRepository;
@@ -31,6 +29,8 @@ public class MitocodeSesion8DemoApplication {
     CommandLineRunner commandLineRunner(StudentRepository studentRepository,
     		StudentIdCardRepository studentIdCardRepository) {
         return args -> {
+        	
+        	//Student
         	Faker faker = new Faker();
         	String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
@@ -41,31 +41,51 @@ public class MitocodeSesion8DemoApplication {
                     email,
                     faker.number().numberBetween(17, 55));
             
+            //Student-->Book
             student.addBook(
                     new Book("Clean Code", LocalDateTime.now().minusDays(4)));
 
 
             student.addBook(
-                    new Book("Think and Grow Rich", LocalDateTime.now()));
+                    new Book("Spring Boot in Action", LocalDateTime.now()));
 
 
             student.addBook(
                     new Book("Spring Data JPA", LocalDateTime.now().minusYears(1)));
             
 
+            //Student-->StudentIdCard
             StudentIdCard studentIdCard = new StudentIdCard(
                     "123456789",
                     student);
 
             student.setStudentIdCard(studentIdCard);
             
-            student.enrolToCourse(
-                    new Course("Computer Science", "IT"));
+            
+            //Student-->Enrolment
+            student.addEnrolment(new Enrolment(
+                    new EnrolmentId(1L, 1L),
+                    student,
+                    new Course("Computer Science", "IT"),
+                    LocalDateTime.now()
+            ));
 
-            student.enrolToCourse(
-                    new Course("Amigoscode Sring Data JPA", "IT"));
+            student.addEnrolment(new Enrolment(
+                    new EnrolmentId(1L, 2L),
+                    student,
+                    new Course("Mitocode Spring Data JPA", "IT"),
+                    LocalDateTime.now().minusDays(18)
+            ));
+
+            student.addEnrolment(new Enrolment(
+                    new EnrolmentId(1L, 2L),
+                    student,
+                    new Course("Mitocode Spring Data JPA", "IT"),
+                    LocalDateTime.now().minusDays(18)
+            ));
 
             studentRepository.save(student);
+            
             
             studentRepository.findById(1L)
             .ifPresent(s -> {
@@ -76,32 +96,6 @@ public class MitocodeSesion8DemoApplication {
                             s.getFirstName() + " borrowed " + book.getBookName());
                 });
             });
-            
-
         };
     }
-	
-	private void sorting(StudentRepository studentRepository) {
-        Sort sort = Sort.by("firstName").ascending()
-                .and(Sort.by("age").descending());
-
-        studentRepository.findAll(sort)
-                .forEach(student -> System.out.println(student.getFirstName() + " " + student.getAge()));
-    }
-	
-	private void generateRandomStudents(StudentRepository studentRepository) {
-        Faker faker = new Faker();
-        for (int i = 0; i < 20; i++) {
-            String firstName = faker.name().firstName();
-            String lastName = faker.name().lastName();
-            String email = String.format("%s.%s@mitocode.edu", firstName, lastName);
-            Student student = new Student(
-                    firstName,
-                    lastName,
-                    email,
-                    faker.number().numberBetween(17, 55));
-            studentRepository.save(student);
-        }
-    }
-
 }
