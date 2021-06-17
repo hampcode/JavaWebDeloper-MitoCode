@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+
+	<div class="main">
+		<th:block th:include="fragments/navbarPrimary"></th:block>
+		<div class="section">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12">
+
+						<div class="title">
+							<h2>Table with Pagination</h2>
+						</div>
+
+						<table class="table table-responsive highlight">
+							<thead>
+								<tr>
+									<th>Title</th>
+									<th>Author</th>
+									<th>Category</th>
+
+									<th></th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="article : ${articlesList}">
+									<td th:text="${article.title}"></td>
+									<td th:text="${article.author}"></td>
+									<td th:text="${article.category}"></td>
+
+									<td
+										th:text="${#dates.format(article.updatedAt, 'dd-MMM-yyyy')}"></td>
+
+									<td><a
+										th:href="@{/articles/{id}(id=${article.articleId})}"><i
+											class="fab fa-readme"></i></a></td>
+									<td><a
+										th:href="@{/articles/{id}/edit(id=${article.articleId})}"><i
+											class="far fa-edit"></i></a></td>
+									<td><a
+										th:href="@{/articles/{id}/delete(id=${article.articleId})}"><i
+											class="fas fa-trash-alt"></i></a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<br> &nbsp;&nbsp;&nbsp; <br>
+
+			<div class="container">
+				<th:block th:include="fragments/pagination"></th:block>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+	<th:block th:include="fragments/footer"></th:block>
+
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

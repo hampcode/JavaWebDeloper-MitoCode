@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+<th:block th:include="fragments/navbarTransparent"></th:block>
+
+<div class="main">
+    <th:block th:include="fragments/navbarPrimary"></th:block>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-sm-12">
+                    <div class="title">
+                        <h2 th:text="${article.title}"></h2>
+                    </div>
+                    <h6 th:text="${article.category}">Category</h6>
+                    <h6 th:text="'written by ' + ${article.author}">Author</h6>
+                    
+                    <h6 th:text="'created at ' + ${#dates.format(article.createdAt, 'dd-MMM-yyyy HH:mm')}"></h6>
+                    <h6 th:text="'updated at ' + ${#dates.format(article.updatedAt, 'dd-MMM-yyyy HH:mm')}"></h6>
+                    
+                    <p th:text="${article.description}"></p>
+                    <p th:text="${article.content}"></p>
+                </div>
+            </div>
+            &nbsp;
+            &nbsp;
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-sm-12"  sec:authorize="isAuthenticated()">
+                    <a th:href="@{'/articles/' + ${article.articleId} + '/edit'}"
+                       class="btn btn-primary">Edit</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:include="fragments/footer"></th:block>
+<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="header">
+        <h4 th:text="${book.title}" class="title">Edit Book</h4>
+        <p class="category">Details</p>
+    </div>
+
+    <div class="content">
+        <p th:text="${book.author}"></p>
+        <p th:text="${#dates.format(book.dateField, 'yyyy')}"></p>
+        <p th:text="${book.description}"></p>
+        <th:block th:each="category : ${book.categories}">
+            <p th:text="${category.name}"></p>
+        </th:block>
+    </div>
+</div>

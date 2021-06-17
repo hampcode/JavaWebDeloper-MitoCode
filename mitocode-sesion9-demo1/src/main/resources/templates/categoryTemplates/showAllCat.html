@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="header">
+        <h4 class="title">Categories</h4>
+        <p class="category">shows all Categories</p>
+    </div>
+    
+    <div class="content table-responsive table-full-width">
+        <table class="table table-striped">
+            <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+            </thead>
+            <tbody>
+            <tr th:remove="all">
+                <td>123</td>
+                <td>Fantasy</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr th:each="category : ${categories}">
+                <td th:text="${category.id}"></td>
+                <td th:text="${category.name}"></td>
+                <td><a th:href="@{'/category/books/' + ${category.id}}" class="btn btn-primary">View</a></td>
+                <td><a th:href="@{'/category/' + ${category.id}}" class="btn btn-default">Edit</a></td>
+                <td><a th:href="@{'/category/delete/' + ${category.id}}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

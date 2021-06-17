@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+	<th:block th:include="fragments/navbarTransparent"></th:block>
+	<th:block th:include="fragments/header"></th:block>
+	<div class="main main-raised">
+		<div class="section section-basic">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="container">
+							<div class="row" th:each="article : ${articlesList}">
+								<div class="col">
+									<div class="title">
+										<h2 th:text="${article.title}"></h2>
+									</div>
+									<div>
+										<h6
+											th:text="'written by ' + ${article.author} + ' | ' + ${article.category}
+                                               + ' | ' + ${#dates.format(article.updatedAt, 'dd-MM-yyyy HH:mm')}"></h6>
+										<p th:text="${article.description}"></p>
+									</div>
+									<div class="container">
+										<div class="row">
+											<div class="col-sx-6 offset-sx-3"></div>
+											<a th:href="@{'/home/' + ${article.articleId}}"
+												class="btn btn-primary">continue</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="container">
+							<th:block th:include="fragments/pagination"></th:block>
+						</div>
+
+
+
+					</div>
+					<div class="col-md-4">
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="title">
+										<h2>About</h2>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+										sed diam nonumy eirmod tempor invidunt ut labore et dolore
+										magna aliquyam erat, sed diam voluptua. At vero eos et a et ea
+										rebum. Stet clita kasd gubergren, no sea takimata sanctus est
+										Lorem ipsum dolor sit amet.</p>
+									<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+										sed diam nonumy eirmod tempor invidunt ut labore et dolore
+										magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+										et justo duo dolores et ea rebum. .</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="title">
+										<h2>Contact</h2>
+									</div>
+									<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
+										sed diam nonumy eirmod tempor invidunt ut labore et dolore
+										magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+										et justo duo dolores et ea rebum. .</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<th:block th:include="fragments/footer"></th:block>
+
+	<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

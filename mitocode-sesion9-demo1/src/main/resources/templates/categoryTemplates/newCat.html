@@ -1,0 +1,20 @@
+<div class="card">
+    <div class="header">
+        <h4 class="title">Add new Category</h4>
+        <p class="category">fill out & click save</p>
+    </div>
+
+    <div class="content">
+        <form th:object="${category}" th:action="@{/category}" th:method="post">
+            <div class="form-group">
+                <input type="hidden" class="form-control" th:field="*{id}"/>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="name" th:field="*{name}" placeholder="type here ..."/>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+    </div>
+</div>

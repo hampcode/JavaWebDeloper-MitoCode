@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="fragments/head"></th:block>
+
+<body class="index-page sidebar-collapse">
+
+<th:block th:include="fragments/navbarTransparent"></th:block>
+<th:block th:include="fragments/header"></th:block>
+
+<div class="main main-raised">
+    <div class="section section-basic">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 offset-md-2 col-sm-12">
+
+                    <div class="title">
+                        <h2 th:text="${title}"></h2>
+                    </div>
+                    <h6 th:text="${ex.message}"></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:include="fragments/footer"></th:block>
+
+<th:block th:include="fragments/scripts"></th:block>
+</body>
+
+</html>

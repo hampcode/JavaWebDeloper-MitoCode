@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="header">
+        <h4 class="title">Add new Book</h4>
+        <p class="category">fill out & click save</p>
+    </div>
+
+    <div class="content">
+        <form th:object="${book}" th:action="@{/book}" th:method="post">
+            <div class="form-group">
+                <input type="hidden" class="form-control" th:field="*{id}"/>
+            </div>
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" aria-describedby="title" th:field="*{title}" playeholder="Harry Potter and the Deathly Hollows">
+            </div>
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" aria-describedby="author" th:field="*{author}" playeholder="Joanne K. Rowling"/>
+            </div>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" class="form-control" th:field="*{categories}" multiple="multiple">
+                    <option th:each="category : ${categories}" th:text="${category.name}" th:value="${category.id}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="date">Year</label>
+                <input type="text" class="form-control" id="date" th:field="*{dateField}"/>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea rows="4" type="textarea" class="form-control" id="description" th:field="*{description}" playeholder="type here ..."/></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+    </div>
+</div>
