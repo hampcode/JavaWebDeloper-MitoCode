@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4">
+
+		<div class="card bg-light">
+			<div class="card-header text-white bg-dark">Cliente</div>
+			<div class="card-body">
+
+				<div th:object="${customer}" th:remove="tag">
+					<ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger"
+						role="alert">
+						<li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+				</div>
+
+				<form th:action="@{/customers/save}" th:object="${customer}" method="post">
+					<div class="form-group row">
+						<label for="firtName" class="col-sm-2 col-form-label">Nombre</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{firstName}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></small>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="lastName" class="col-sm-2 col-form-label">Apellido</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{lastName}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></small>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label for="email" class="col-sm-2 col-form-label">Dni</label>
+						<div class="col-sm-6">
+							<input type="text" th:field="*{dni}" class="form-control"
+								th:errorclass="'form-control alert-danger'" /> <small
+								class="form-text text-danger"
+								th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></small>
+						</div>
+					</div>
+					
+					
+					<div class="form-group row">
+						<div class="col-sm-6">
+							<input type="submit" th:value="${title}"
+								class="btn btn-primary" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

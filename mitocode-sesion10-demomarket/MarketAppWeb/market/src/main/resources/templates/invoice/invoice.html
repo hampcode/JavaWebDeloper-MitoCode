@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+
+		<div class="card">
+			<div class="card-header text-white bg-dark">Generar Facturas</div>
+			<div class="card-body">
+				
+
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<thead class="bg-dark text-white">
+							<tr>
+								<th>Id</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+								<th>Dni</th>
+								<th>Generar</th>
+								<th>Ver</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="customer:${customers}">
+								<td th:text="${customer.id}"></td>
+								<td th:text="${customer.firstName}"></td>
+								<td th:text="${customer.lastName}"></td>
+								<td th:text="${customer.dni}"></td>
+								<td>
+									<a th:href="@{'/invoices/form/' + ${customer.id}}"
+									class="btn btn-primary"> Factura</a></td>
+								<td><a th:href="@{'/invoices/customers/' + ${customer.id}}"
+									class="btn btn-primary">Detalle</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<nav th:replace="paginator/paginator-nav :: paginator"></nav>
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

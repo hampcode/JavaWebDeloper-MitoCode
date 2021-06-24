@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+
+			$("#searchproduct").autocomplete({
+
+				source : function(request, response) {
+					$.ajax({
+						url : "/products/loadproducts/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.name,
+									price : item.price,
+								};
+							}));
+						},
+					});
+				},
+				select : function(event, ui) {
+					
+					if(itemsHelper.hasProduct(ui.item.value)){
+						itemsHelper.incrementQuantity(ui.item.value, ui.item.price);
+						return false;
+					}
+					
+					var line = $("#templateItemsInvoice").html();
+					
+					line = line.replace(/{ID}/g, ui.item.value);
+					line = line.replace(/{NAME}/g, ui.item.label);
+					line = line.replace(/{PRICE}/g, ui.item.price);
+					
+					$("#loadItemProducts tbody").append(line);
+					itemsHelper.calculateAmount(ui.item.value, ui.item.price, 1);
+
+					return false;
+				}
+			});
+			
+			$("form").submit(function(){
+				$("#templateItemsInvoice").remove();
+				return;
+			});
+
+		});
+		
+		var itemsHelper = {
+			calculateAmount: function(id, price, quantity){
+				$("#total_amount_" + id).html(parseInt(price) * parseInt(quantity));
+				this.calculateGranTotal();
+			},
+			hasProduct: function(id){
+				
+				var result = false;
+				
+				$('input[name="item_id[]"]').each(function(){
+					if(parseInt(id) == parseInt($(this).val()) ){
+						result = true;
+					}
+				});
+				
+				return result;
+			},
+			incrementQuantity: function(id, price){
+				var quantity = $("#quantity_" + id).val() ? parseInt($("#quantity_" + id).val()) : 0;
+				$("#quantity_" + id).val(++quantity);
+				this.calculateAmount(id, price, quantity);
+			},
+			deleteLineInvoice: function(id){
+				$("#row_" + id).remove();
+				this.calculateGranTotal();
+			},
+			calculateGranTotal: function(){
+				var total = 0;
+				
+				$('span[id^="total_amount_"]').each(function(){
+					total += parseInt($(this).html());
+				});
+				
+				$('#gran_total').html(total);
+			}
+		}
+	</script>
+</body>
+</html>

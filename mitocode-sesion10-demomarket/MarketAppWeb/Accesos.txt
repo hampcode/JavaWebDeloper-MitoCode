@@ -1,0 +1,14 @@
+URL
+=====
+http://localhost:8090
+
+Usuarios
+========
+
+Role=ROLE_ADMIN
+username=hampcode
+password=12345
+
+Role=ROLE_USER
+username=usercode
+password=12345

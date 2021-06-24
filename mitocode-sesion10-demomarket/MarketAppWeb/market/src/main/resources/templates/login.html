@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>Market</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="title" content="Farma - Cuidamos tu salud" />
+<meta name="description" content="Market" />
+<meta name="author" content="Henry Antonio Mendoza Puerta">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+</head>
+<body>
+
+	<div class="container">
+		<div class="card border-primary text-center">
+			<div class="card-header text-white bg-dark">Market</div>
+			<div class="card-body ">
+				<form th:action="@{/login}" method="post">
+
+					<div class="form-group">
+						<input type="text" name="username" id="username"
+							class="form-control" placeholder="usuario" autofocus required />
+					</div>
+
+					<div class="form-group">
+						<input type="password" name="password" id="password"
+							class="form-control" placeholder="clave" required />
+					</div>
+
+					<div class="form-group">
+						<input type="submit" class="btn btn-lg btn-primary btn-block"
+							value="Ingresar" />
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+		<div class="alert alert-success" th:if="${success != null}"
+			th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alert alert-info" th:if="${info != null}"
+			th:text="${info}"></div>
+</div>
+
+
+
+</body>
+</html>

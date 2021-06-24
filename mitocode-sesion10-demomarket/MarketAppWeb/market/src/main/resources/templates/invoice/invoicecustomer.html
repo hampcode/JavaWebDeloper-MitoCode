@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container py-4 ">
+
+		<div class="card bg-light ">
+			<div class="card-header text-white bg-dark" th:text="${title}"></div>
+			<div class="card-body">
+
+				<h4 class="card-title">
+					<a th:href="@{/invoices/list}"
+						class="btn btn-light btn-xs">&laquo; Regresar</a>
+				</h4>
+
+				<ul class="list-group">
+					<li class="list-group-item" th:text="${customer.firstName}"></li>
+					<li class="list-group-item" th:text="${customer.lastName}"></li>
+					<li class="list-group-item" th:text="${customer.dni}"></li>
+				</ul>
+			</div>
+
+		</div>
+
+		<div class="card bg-light">
+			<div class="card-header text-white bg-dark">Facturas</div>
+			<div class="card-body">
+
+				<div th:if="${#lists.isEmpty(invoices)}"
+					class="alert alert-info my-4"
+					th:text="'El cliente  ' + ${customer.firstName} + ' ' + ${customer.lastName} + ' no tiene facturas'"></div>
+
+				<table th:if="${not #lists.isEmpty(invoices)}"
+					class="table">
+					<thead>
+						<tr>
+							<th>Numero</th>
+							<th>Descripcion</th>
+							<th>Fecha</th>
+							<th>Total</th>
+							<th>Detalle</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="invoice: ${invoices}">
+							<td th:text="${invoice.id}"></td>
+							<td th:text="${invoice.description}"></td>
+							<td th:text="${invoice.createAt}"></td>
+							<td th:text="${invoice.total}"></td>
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{'/invoices/detail/'+ ${invoice.id}}"
+								th:text="'Detalle'"></a></td>
+						</tr>
+					</tbody>
+
+				</table>
+
+			</div>
+		</div>
+	</div>
+
+
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

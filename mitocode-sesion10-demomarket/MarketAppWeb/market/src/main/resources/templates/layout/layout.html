@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	
+	 xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>Market</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="title" content="Farma - Cuidamos tu salud" />
+<meta name="description" content="Market" />
+<meta name="author" content="Henry Antonio Mendoza Puerta">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+</head>
+<body>
+
+	<header th:fragment="header">
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarTogglerDemo01"
+				aria-controls="navbarTogglerDemo01" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="#"
+						th:href="@{/dashboards/list}">Market</a></li>
+
+
+					<li class="nav-item dropdown" ><a sec:authorize="hasRole('ROLE_ADMIN')" 
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Mantenimiento </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" th:href="@{/customers/list}">Clientes</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Productos</a>
+
+
+						</div>
+					</li>
+
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Facturación </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#" th:href="@{/invoices/list}">Factura</a>
+
+							<div class="dropdown-divider"></div>
+
+						</div></li>
+
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Reportes </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Factura</a>
+
+							<div class="dropdown-divider"></div>
+
+						</div></li>
+
+					
+				</ul>
+
+
+				<ul class="navbar-nav navbar-right">
+
+					<li class="dropdown show"><a
+						class="btn btn-outline-primary dropdown-toggle" href="#"
+						role="button" id="dropdownMenuLink" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false"> <span
+							sec:authentication="name"></span>
+					</a>
+
+						<div class="dropdown-menu">
+							<form id="logoutForm" th:action="@{/logout}" method="post">
+								<button class="dropdown-item"
+									onclick="document.getElementById('logoutForm').submit();"
+									type="submit">Cerrar Sesion</button>
+							</form>
+						</div></li>
+				</ul>
+
+			</div>
+		</nav>
+
+		<div class="container text-center">
+			<h1>Market</h1>
+		</div>
+
+
+		<div class="alert alert-success" th:if="${success != null}"
+			th:text="${success}"></div>
+		<div class="alert alert-danger" th:if="${error != null}"
+			th:text="${error}"></div>
+		<div class="alert alert-info" th:if="${info != null}"
+			th:text="${info}"></div>
+	</header>
+
+	<div class="container"></div>
+
+
+	<footer th:fragment="footer" class="container">
+		<p>
+			Powered by <a href="https://github.com/githamp" target=_blank>HAMP</a>.&copy;
+			Company 2019.
+		</p>
+
+
+		<script th:src="@{/js/jquery.min.js}"></script>
+		<script th:src="@{/js/popper.min.js}"></script>
+		<script th:src="@{/js/bootstrap.min.js}"></script>
+		<script th:src="@{/js/jquery-ui.min.js}"></script>
+	</footer>
+
+
+</body>
+</html>
