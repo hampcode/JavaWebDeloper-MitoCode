@@ -20,6 +20,9 @@ public interface ArticleRepository extends PagingAndSortingRepository<Article, L
 	@Query("SELECT a FROM Article a WHERE a.title=:title and a.author=:author")
 	List<Article> findByTitleAndAuthor(@Param("title") String title, @Param("author") String author);
 
+	//@Query("SELECT a FROM Article a WHERE a.title=?1")
+	List<Article> findByTitleContaining(String title);
+	
 	Page<Article> findAll(Pageable pageable);
 
 }

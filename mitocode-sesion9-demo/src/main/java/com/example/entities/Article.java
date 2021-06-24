@@ -8,12 +8,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Type;
+
+
 
 
 @Entity
@@ -32,9 +37,14 @@ public class Article extends DateAudit  {
     @Column(name="title")
     private String title;
 
-    @NotEmpty(message="Please enter a category.")
-    @Column(name="category")
-    private String category;
+    //@NotEmpty(message="Please enter a category.")
+    //@Column(name="category")
+    //private String category;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @NotEmpty(message="Please enter the name of the author.")
     @Column(name="author")
@@ -58,7 +68,7 @@ public class Article extends DateAudit  {
         this.setUpdatedAt(new Date());
     }
 
-    public Article(@Size(min = 2, max = 100) String title, @NotEmpty String category,
+    /*public Article(@Size(min = 2, max = 100) String title, @NotEmpty String category,
                    @NotEmpty String author, String description, @NotEmpty String content) {
         this.title = title;
         this.category = category;
@@ -69,7 +79,7 @@ public class Article extends DateAudit  {
         this.setCreatedAt(new Date());
         this.setUpdatedAt(new Date());
         
-    }
+    }*/
 
     public long getArticleId() {
         return articleId;
@@ -83,12 +93,12 @@ public class Article extends DateAudit  {
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getCategory() {
+    /*public String getCategory() {
         return category;
     }
     public void setCategory(String category) {
         this.category = category;
-    }
+    }*/
 
     public String getAuthor() {
         return author;
@@ -113,5 +123,15 @@ public class Article extends DateAudit  {
     public void setContent(String content) {
         this.content = content;
     }
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+    
+    
 
 }

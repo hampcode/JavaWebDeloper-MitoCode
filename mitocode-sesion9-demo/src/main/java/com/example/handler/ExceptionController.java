@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.example.exception.BadRequestException;
+import com.example.exception.InternalException;
 import com.example.exception.ResourceNotFoundException;
 
 
@@ -29,6 +30,15 @@ public class ExceptionController {
     public ModelAndView BadRequestView(BadRequestException exception){
         ModelAndView modelAndView = new ModelAndView("errorView");
         modelAndView.addObject("title", "Bad Request");
+        modelAndView.addObject("ex", exception);
+        return modelAndView;
+    }
+    
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(InternalException.class)
+    public ModelAndView InternalExceptionView(InternalException exception){
+        ModelAndView modelAndView = new ModelAndView("errorView");
+        modelAndView.addObject("title", "Internal Exception");
         modelAndView.addObject("ex", exception);
         return modelAndView;
     }

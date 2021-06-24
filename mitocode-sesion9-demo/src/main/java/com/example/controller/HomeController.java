@@ -29,6 +29,16 @@ public class HomeController {
 
 	protected static final String ARTICLE_VIEW = "articles/showArticle";
 
+	@GetMapping("/search")	
+    public String search(@RequestParam("s") String s, Model model) {
+        if (s.equals("")) {
+            return "redirect:/";
+        }
+
+        model.addAttribute("articlesList", articleService.search(s));
+        return INDEX_VIEW;
+    }
+	
 	@GetMapping
 	public ModelAndView getIndex(@RequestParam("pageSize") Optional<Integer> pageSize,
 			@RequestParam("page") Optional<Integer> page) {

@@ -92,4 +92,9 @@ public class ArticleServiceImpl implements ArticleService {
     public Page<Article> findAll(Pageable pageable) {
         return articleRepository.findAll(pageable);
     }
+
+	@Override
+	public List<Article> search(String title) {
+		return articleRepository.findByTitleContaining(title);
+	}
 }

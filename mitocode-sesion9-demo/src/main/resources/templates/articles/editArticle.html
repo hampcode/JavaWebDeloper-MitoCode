@@ -47,12 +47,13 @@
 							</div>
 
 							<div class="form-group">
-								<input th:field="*{category}" id="category" type="text"
-									class="form-control validate"> <label for="category">Category</label>
-								<span class="text-danger errorMsg"
-									th:if="${#fields.hasErrors('category')}"
-									th:errors="*{category}"></span>
+								<label for="category">Category</label> <select id="category"
+									class="form-control" th:field="*{category}">
+									<option th:each="category : ${categories}"
+										th:text="${category.name}" th:value="${category.categoryId}"></option>
+								</select>
 							</div>
+
 
 							<div class="form-group">
 								<textarea th:field="*{description}" id="description"

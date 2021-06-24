@@ -33,7 +33,7 @@
 								<tr th:each="article : ${articlesList}">
 									<td th:text="${article.title}"></td>
 									<td th:text="${article.author}"></td>
-									<td th:text="${article.category}"></td>
+									<td th:text="${article.category.name}"></td>
 
 									<td
 										th:text="${#dates.format(article.updatedAt, 'dd-MMM-yyyy')}"></td>

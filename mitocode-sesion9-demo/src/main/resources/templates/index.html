@@ -10,6 +10,17 @@
 	<div class="main main-raised">
 		<div class="section section-basic">
 			<div class="container">
+
+				<form class="form-inline" action="#"
+					th:action="@{/search}" method="GET">
+					<div class="form-group">
+						<input type="text" class="form-control" name="s"
+							placeholder="Enter name..." />
+					</div>
+					<button type="submit" class="btn btn-danger">Buscar</button>
+				</form>
+
+
 				<div class="row">
 					<div class="col-md-8">
 						<div class="container">
@@ -37,7 +48,7 @@
 
 
 						<div class="container">
-							<th:block th:include="fragments/pagination"></th:block>
+							<!-- <th:block th:include="fragments/pagination"></th:block>-- -->
 						</div>
 
 

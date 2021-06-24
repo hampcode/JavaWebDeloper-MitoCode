@@ -15,13 +15,24 @@
 		<div class="collapse navbar-collapse">
 			<ul class="navbar-nav ml-auto">
 				<li class="dropdown nav-item"><a th:href="@{/articles/new}"
-					class="nav-link"> <i
+					class="nav-link" sec:authorize="isAuthenticated()"> <i
 						class="fas fa-plus"></i> New Article
 				</a></li>
 				<li class="dropdown nav-item"><a th:href="@{/articles}"
-					class="nav-link"> <i
+					class="nav-link" sec:authorize="isAuthenticated()"> <i
 						class="material-icons">apps</i> All Articles
 				</a></li>
+				<li class="dropdown nav-item" sec:authorize="!isAuthenticated()"><a
+					th:href="@{/login}" class="nav-link"> <i class="material-icons">apps</i>
+						Sign In
+				</a></li>
+				
+				
+				<li class="dropdown nav-item"><a th:href="@{/logout}"
+					class="nav-link" sec:authorize="isAuthenticated()"> <i
+						class="material-icons">apps</i> Sign Out
+				</a></li>
+				
 			</ul>
 		</div>
 	</div>
