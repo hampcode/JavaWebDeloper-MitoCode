@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class OutcomeRequestUpdate {
-	private Long outomeId;
+	private Long outcomeId;
 	
 	@NotBlank
 	@NotNull

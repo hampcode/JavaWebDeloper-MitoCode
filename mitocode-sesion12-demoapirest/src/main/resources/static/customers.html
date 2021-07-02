@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Clientes</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/update_customer.js"></script>
+<script type="text/javascript" src="/js/delete_customer.js"></script>
+<script type="text/javascript" src="/js/get_customer.js"></script>
+</head>
+<body>
+	<div class="container">
+		<ul class="nav nav-pills">
+			<li class="nav-item">
+				<a class="nav-link" href="/">Nuevo Cliente</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/customers.html">Lista de Clientes</a>
+			</li>
+		</ul>
+        <div id="div_customer_table">
+			<h1>Clientes</h1>
+			<div class="row col-md-6 table-responsive">
+			  <table id="customerTable" class="table table-striped">
+				<thead>
+				  <tr>
+					<th>Codigo</th>
+					<th>Cliente</th>
+					<th>Direccion</th>
+					<th></th>
+				  </tr>
+				</thead>
+				<tbody>
+				</tbody>
+			  </table>
+			</div>
+		  </div>
+		<div class="row">
+			<div class="col-sm-6" style="display: none; 
+											background-color:#e6fffa; padding:10px; border-radius:3px" 
+									id="div_customer_updating">
+				<form id="update_customer_form">
+					<div class="form-group">
+					<label for="customer_id">Codigo:</label>
+					<input type="text" class="form-control" id="customer_id" readonly>
+					</div>
+					<div class="form-group">
+					<label for="customer_first_name">Nombre:</label>
+					<input type="text" class="form-control" placeholder="Ingrese nombre" id="customer_first_name">
+					</div>
+					<div class="form-group">
+						<label for="customer_last_name">Apellido:</label>
+						<input type="text" class="form-control" placeholder="Ingrese apellido" id="customer_last_name">
+					</div>				  
+					<div class="form-group">
+						<label for="customer_address">Direccion:</label>
+						<input type="text" class="form-control" placeholder="Ingrese Direccion" id="customer_address">
+					</div>				  				
+					<div class="form-group">
+						<label for="customer_age">Edad:</label>
+						<input type="number" class="form-control" 
+								placeholder="Ingrese edad" id="customer_age" min="18" max="60">
+					</div>				  				
+					<button type="submit" class="btn btn-primary">Actualizar</button>
+				</form>
+				<div id="response" style="display:none; margin:10px">
+				</div>
+			</div>
+		</div>
+		<hr>
+
+		  <!-- The Modal -->
+		  <div class="modal fade" id="delete-modal">
+			<div class="modal-dialog modal-dialog-centered">
+			  <div class="modal-content">
+			  
+				<!-- Modal Header -->
+				<div class="modal-header">
+				  <h4 class="modal-title">Eliminar</h4>
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+				
+				<!-- Modal body -->
+				<div class="modal-body">
+				</div>
+				
+				<!-- Modal footer -->
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+				  <button type="button" class="btn btn-danger" id="model-delete-btn">Eliminar</button>
+				</div>				
+			  </div>
+			</div>
+		  </div>
+	</div>
+</body>
+</html>

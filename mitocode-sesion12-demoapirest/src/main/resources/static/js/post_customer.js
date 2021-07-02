@@ -1,0 +1,69 @@
+$(document).ready(function() {
+	let pathname = window.location.pathname;
+        console.log(pathname);
+    $("#add_new_customer").submit(function(evt) {
+        evt.preventDefault();
+
+        
+        let formData = {
+            firstname : $("#firstname").val(),
+            lastname :  $("#lastname").val(),
+            address: $("#address").val(),
+            age: $("#age").val()
+        }
+
+        $.ajax({
+            //url: '/api/customer/create',
+			url: '/customers',
+            type: 'POST',
+            contentType : "application/json",
+            data: JSON.stringify(formData),
+            dataType : 'json',
+            //async: false,
+            //cache: false,
+            success: function (response) {
+                /*let customer = response.customers[0];
+                
+                let customerString = "{ name: " + customer.firstname + " " + customer.lastname + 
+                                            ", address: " + customer.address + 
+                                            ", age: " + customer.age  + " }"*/
+                                            
+                let successAlert = '<div class="alert alert-success alert-dismissible">' + 
+                                        '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                        '<strong>' + response.message + '</strong> ' ;
+                                    '</div>'
+                $("#response").append(successAlert);
+                $("#response").css({"display": "block"});
+
+                resetUploadForm();
+            },
+            error: function (response) {
+                let errorAlert = '<div class="alert alert-danger alert-dismissible">' + 
+                                    '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                                    '<strong>' + response.message + '</strong>' + ' ,Error: ' + message.error + 
+                                '</div>'
+                $("#response").append(errorAlert);
+                $("#response").css({"display": "block"});
+
+                resetUploadForm();
+            }
+        });
+    });
+
+    function resetUploadForm(){
+        $("#firstname").val("");
+        $("#lastname").val("");
+        $("#address").val("");
+        $("#age").val("");
+    }
+
+    /*(function(){
+        let pathname = window.location.pathname;
+        console.log(pathname);
+        if(pathname === "/"){
+            $(".nav .nav-item a:first").addClass("active");
+        } else if (pathname == "/customers.html") {
+            $(".nav .nav-item a:last").addClass("active");
+        }
+    })();*/
+});
