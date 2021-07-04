@@ -1,0 +1,21 @@
+<div class="columns is-vcentered">
+    <div class="column has-text-right">
+        <a [routerLink]="['create']" class="button is-link is-medium">
+            Registrar un nuevo gasto
+        </a>
+    </div>
+</div>      
+
+<div *ngIf="outcomes.length" class="columns is-multiline">
+    <div class="box" *ngFor="let outcome of outcomes">
+        <div class="title is-size-4">{{outcome.amount}}</div>
+        <div class="subtitle is-size-5">{{outcome.detail}}</div>
+        <div class="hast-text-grey">
+            {{outcome.createdAt |date:'E dd hh:mma' | uppercase}}
+        </div>
+    </div>
+</div>
+
+<div *ngIf="outcomes.length===0" class="has-text-centered is-size-4">
+    - no se han encontrado registros -
+</div>

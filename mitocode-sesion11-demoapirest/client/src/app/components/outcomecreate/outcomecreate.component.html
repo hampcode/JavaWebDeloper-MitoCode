@@ -1,0 +1,38 @@
+<h1 class="title">Registrar un nuevo gasto</h1>
+
+<div *ngIf="loading" class="has-text-centered is-size-3">
+    --procesando--
+</div>
+
+<form  *ngIf="!loading" (ngSubmit)="onSubmit()" #outcomeForm="ngForm">
+    <div class="field">
+        <label class="label">Monto</label>
+        <div class="control">
+            <input type="text" class="input" 
+             placeholder="Ingrese el monto"
+             name="amount"
+            [(ngModel)]="outcome.amount">
+        </div>
+    </div>
+
+
+    <div class="field">
+        <label class="label">Detalle</label>
+        <div class="control">
+            <input type="text" class="input" 
+             placeholder="Ingrese el detakke"
+             name="detail"
+            [(ngModel)]="outcome.detail">
+        </div>
+    </div>
+
+    <div class="field is-grouped">
+        <div class="control">
+            <button class="button is-link is is-medium">Guardar</button>
+        </div>
+        <div class="control">            
+            <a [routerLink]="['/outcomes']" class="button is-link is is-medium">Volver</a>
+        </div>
+    </div>
+
+</form>
